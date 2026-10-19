@@ -1,0 +1,50 @@
+/* ===== Task 2: validation messages without JavaScript =====
+   Bootstrap hides .invalid-feedback by default.
+   :user-invalid / :user-valid match ONLY after the user has changed the field
+   (or tried to submit the form), so nothing is red when the page opens. */
+
+/* red border for invalid inputs, selects, textareas */
+.form-control:user-invalid,
+.form-select:user-invalid {
+  border-color: var(--bs-form-invalid-border-color, #dc3545);
+}
+.form-control:user-invalid:focus,
+.form-select:user-invalid:focus {
+  box-shadow: 0 0 0 .25rem rgba(220, 53, 69, .25);
+}
+
+/* green border for valid ones (nice extra feedback) */
+.form-control:user-valid,
+.form-select:user-valid {
+  border-color: var(--bs-form-valid-border-color, #198754);
+}
+
+/* show the message that comes after the invalid field */
+.form-control:user-invalid ~ .invalid-feedback,
+.form-select:user-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+/* checkbox: label and message are siblings of the input */
+.form-check-input:user-invalid {
+  border-color: #dc3545;
+}
+.form-check-input:user-invalid ~ .invalid-feedback {
+  display: block;
+}
+.form-check-input:user-invalid ~ .form-check-label {
+  color: #dc3545;
+}
+
+/* radio group: the message comes after the .radio-group wrapper, so we look "up" with :has() */
+.radio-group:has(.form-check-input:user-invalid) + .invalid-feedback {
+  display: block;
+}
+.radio-group:has(.form-check-input:user-invalid) .form-check-input {
+  border-color: #dc3545;
+}
+
+/* the hint under the textarea stays visible; hide it while the error is shown */
+.form-control:user-invalid ~ .form-text {
+  display: none;
+}

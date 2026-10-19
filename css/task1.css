@@ -1,0 +1,224 @@
+/* ===== Task 1: Book a train ticket — my CSS on top of Bootstrap ===== */
+
+:root {
+  --green: #0F6B5F;
+  --orange: #F2A93B;
+  --ink: #16302B;
+  --bg-soft: #F4F7F5;
+  --line: #E6EFEC;
+  --radius: 1rem;
+
+  /* Re-define Bootstrap's own variables so every component picks up my palette */
+  --bs-body-font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bs-body-color: var(--ink);
+  --bs-border-radius: .6rem;
+}
+
+body {
+  font-family: var(--bs-body-font-family);
+  color: var(--ink);
+  background: var(--line);
+  font-size: .875rem;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 2rem 0;
+  background: linear-gradient(160deg, #dfeae6 0%, var(--line) 100%);
+}
+
+/* ----- Card ----- */
+.ticket-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 1rem 2.5rem rgba(22, 48, 43, .18);
+  overflow: hidden;                 /* clips the green header to the rounded corners */
+}
+
+.ticket-card__header {
+  background: var(--green);
+  color: #fff;
+  padding: 1.5rem 1.75rem;
+}
+
+.ticket-card__title {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.ticket-card__body {
+  padding: 2rem 1.75rem 1.75rem;
+}
+
+/* ----- Labels / legends ----- */
+.form-label,
+legend.form-label {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .35rem;
+  float: none;                       /* Bootstrap legends float by default */
+  width: auto;
+}
+
+/* ----- Inputs (shared look) ----- */
+.form-control,
+.form-select {
+  background-color: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: .6rem;
+  color: var(--ink);
+  font-size: .8125rem;
+  box-shadow: none;
+}
+
+.form-control::placeholder { color: #8aa09a; opacity: 1; }
+
+.form-control:focus,
+.form-select:focus {
+  background-color: #fff;
+  border-color: var(--green);
+  box-shadow: 0 0 0 .2rem rgba(15, 107, 95, .2);
+}
+
+/* ----- From / To: floating labels that always stay "floated" like in the design ----- */
+.form-floating > .form-control {
+  padding-top: 1.7rem;
+  padding-bottom: .5rem;
+  height: calc(3.4rem + 2px);
+  min-height: 0;
+}
+
+/* placeholder text is visible and dark (looks like the value in the picture,
+   but it is only a placeholder, so the "Clear" button can really empty the field) */
+.form-floating > .form-control::placeholder,
+.form-floating > .form-control:focus::placeholder {
+  color: var(--ink);
+  opacity: .85;
+}
+
+.form-floating > label {
+  padding: .6rem .9rem;
+  font-size: .75rem;
+  font-weight: 500;
+  color: #7d9690;
+  opacity: 1;
+  transform: none;                   /* keep the small label on top, always */
+  height: auto;
+}
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+  color: var(--green);
+  opacity: 1;
+  transform: none;
+}
+/* Bootstrap adds a white "cover" behind floated labels — remove it */
+.form-floating > .form-control:focus ~ label::after,
+.form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+  background: transparent;
+}
+
+/* ----- Trip switch (two radios styled as a pill) ----- */
+.trip-switch {
+  border: 1px solid var(--green);
+  border-radius: 50rem;
+  overflow: hidden;
+  background: #fff;
+}
+.trip-switch__btn {
+  border: 0;
+  border-radius: 0;
+  padding: .5rem 1.25rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--green);
+}
+.btn-check:checked + .trip-switch__btn {
+  background: var(--green);
+  color: #fff;
+}
+.btn-check:focus-visible + .trip-switch__btn {
+  outline: 3px solid var(--orange);
+  outline-offset: -3px;
+}
+
+/* ----- Phone prefix ----- */
+.input-group-text {
+  background: var(--green);
+  border: 1px solid var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: .8125rem;
+  border-radius: .6rem 0 0 .6rem;
+}
+.input-group > .form-control { border-radius: 0 .6rem .6rem 0; }
+
+/* ----- Radios, checkbox, switch ----- */
+.form-check-label { font-size: .8125rem; }
+
+.form-check-input {
+  border-color: #9bb1ab;
+}
+.form-check-input:checked {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+.form-check-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 .2rem rgba(15, 107, 95, .25);
+}
+
+/* ----- Buttons ----- */
+.btn-find,
+.btn-clear {
+  border-radius: 50rem;
+  padding: .7rem 1.75rem;
+  font-size: .8125rem;
+  font-weight: 700;
+}
+
+.btn-find {
+  background: var(--orange);
+  border: 2px solid var(--orange);
+  color: #fff;
+}
+.btn-find:hover,
+.btn-find:focus-visible {
+  background: #e49a2a;
+  border-color: #e49a2a;
+  color: #fff;
+}
+
+.btn-clear {
+  background: #fff;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.btn-clear:hover,
+.btn-clear:focus-visible {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btn-find:focus-visible,
+.btn-clear:focus-visible {
+  box-shadow: 0 0 0 .25rem rgba(15, 107, 95, .35);
+}
+
+/* ----- Error highlight only AFTER the user touched the field ----- */
+.form-control:user-invalid,
+.form-select:user-invalid {
+  border-color: #dc3545;
+}
+
+/* ----- Phone (small screens) ----- */
+@media (max-width: 575.98px) {
+  .page { padding: 1rem 0; }
+  .ticket-card__header { padding: 1rem 1.25rem; }
+  .ticket-card__title { font-size: 1rem; }
+  .ticket-card__body { padding: 1.25rem; }
+  .trip-switch { display: flex; width: 100%; }
+  .trip-switch__btn { flex: 1 1 0; }
+  .btn-find, .btn-clear { width: 100%; }
+}
